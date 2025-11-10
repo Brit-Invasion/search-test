@@ -56,7 +56,7 @@ if __name__ == '__main__':
         url = "https://www.google.com"
         driver.get(url)
 
-        searchbar_locator = (By.NAME, "")
+        searchbar_locator = (By.NAME, "q")
         link_locator = (By.PARTIAL_LINK_TEXT, "DataArt")
 
         search(searchbar_locator, link_locator)
