@@ -12,7 +12,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Running tests...'
-                bat 'py -m pytest --junitxml=report.xml || true'
+                bat 'py -m pytest --junitxml=report.xml || echo "Pytest failed"'
             }
         }
     }
