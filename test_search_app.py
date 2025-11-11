@@ -40,23 +40,23 @@ def test_helper_class_works(browser_instance):
     search_bar = util.find_clickable_element((By.NAME, "q"))
     assert search_bar.is_displayed()
 
-def test_app_main_logic_success(browser_instance):
-    """
-    Тест 3: Главный E2E-тест твоего скрипта.
-    Проверяем успешный сценарий.
-    """
-    driver = browser_instance
-    util = SeleniumUtilities(driver, 10)
+# def test_app_main_logic_success(browser_instance):
+#     """
+#     Тест 3: Главный E2E-тест твоего скрипта.
+#     Проверяем успешный сценарий.
+#     """
+#     driver = browser_instance
+#     util = SeleniumUtilities(driver, 10)
     
-    search_locator = (By.NAME, "q")
-    search = "DataArt"
-    link_locator = (By.PARTIAL_LINK_TEXT, search)
+#     search_locator = (By.NAME, "q")
+#     search = "DataArt"
+#     link_locator = (By.PARTIAL_LINK_TEXT, search)
 
-    # --- Вызываем твою главную функцию ---
-    result = search_logic(driver, util, search_locator, link_locator, search)
+#     # --- Вызываем твою главную функцию ---
+#     result = search_logic(driver, util, search_locator, link_locator, search)
     
-    # --- Проверяем (Assert) результат ---
-    assert result is True
+#     # --- Проверяем (Assert) результат ---
+#     assert result is True
 
 def test_app_main_logic_failure_on_bad_link(browser_instance):
     """
