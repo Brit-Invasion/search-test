@@ -49,10 +49,11 @@ def test_app_main_logic_success(browser_instance):
     util = SeleniumUtilities(driver, 10)
     
     search_locator = (By.NAME, "q")
-    link_locator = (By.PARTIAL_LINK_TEXT, "DataArt")
-    
+    search = "DataArt"
+    link_locator = (By.PARTIAL_LINK_TEXT, search)
+
     # --- Вызываем твою главную функцию ---
-    result = search_logic(driver, util, search_locator, link_locator)
+    result = search_logic(driver, util, search_locator, link_locator, search)
     
     # --- Проверяем (Assert) результат ---
     assert result is True

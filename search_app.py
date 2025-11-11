@@ -39,7 +39,7 @@ def driver_setup():
     print("Driver is active")
     return driver
 
-def search_logic(driver, util, search_locator, search, link_locator):
+def search_logic(driver, util, search_locator, link_locator, search="DataArt"):
     try:
         url = "https://www.google.com"
         driver.get(url)
@@ -70,7 +70,7 @@ if __name__ == '__main__':
         search = "DataArt"
         link_locator = (By.PARTIAL_LINK_TEXT, search)
 
-        success = search_logic(driver, util, searchbar_locator, search, link_locator)
+        success = search_logic(driver, util, searchbar_locator, link_locator, search)
 
         if success:
             print(f"Successfully found link: {driver.title}")
