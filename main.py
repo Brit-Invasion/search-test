@@ -47,24 +47,24 @@ def search(searchbar_locator, link_locator):
 
 
 
-# if __name__ == '__main__':  
-#     try:
+if __name__ == '__main__':  
+    try:
 
-#         driver = driver_setup()
-#         util = SeleniumUtilities(driver, 15)
+        driver = driver_setup()
+        util = SeleniumUtilities(driver, 15)
         
-#         url = "https://www.google.com"
-#         driver.get(url)
+        url = "https://www.google.com"
+        driver.get(url)
 
-#         searchbar_locator = (By.NAME, "q")
-#         link_locator = (By.PARTIAL_LINK_TEXT, "DataArt")
+        searchbar_locator = (By.NAME, "q")
+        link_locator = (By.PARTIAL_LINK_TEXT, "DataArt")
 
-#         search(searchbar_locator, link_locator)
+        search(searchbar_locator, link_locator)
 
-#         time.sleep(5)
+        time.sleep(5)
 
-#         driver.quit()
-#         print("Browser closed")
+        driver.quit()
+        print("Browser closed")
 
-#     except Exception as e:
-#         print(f"Error: {e}")
+    except Exception as e:
+        print(f"Error: {e}")
