@@ -2,12 +2,6 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
-            steps {
-                git 'https://github.com/Brit-Invasion/search-test' 
-            }
-        }
-
         stage('Install Dependencies') {
             steps {
                 echo 'Installing Python packages...'
