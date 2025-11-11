@@ -23,48 +23,66 @@ class SeleniumUtilities:
                 EC.element_to_be_clickable(locator)
             )
             return element
-        except TimeoutException:
+        except TimeoutException as e:
             print(f"Timeout: Element '{locator[1]}' wasn't find on page after {self.wait._timeout}s.")
+            raise e
 
 
 def driver_setup():
     print("Updating chromedriver...")
     service = Service(ChromeDriverManager().install())
     options = webdriver.ChromeOptions()
+    # options.add_argument("--headless")
+    options.add_argument("--window-size=1000,800")
+    
     driver = webdriver.Chrome(service=service, options=options)
     print("Driver is active")
-
     return driver
 
-def search(searchbar_locator, link_locator):
-    searchbar = util.find_clickable_element(searchbar_locator)
-    searchbar.send_keys("DataArt" + Keys.ENTER)
+def search_logic(driver, util, search_locator, search, link_locator):
+    try:
+        url = "https://www.google.com"
+        driver.get(url)
 
-    link = util.find_clickable_element(link_locator)
-    link.click()
+        searchbar = util.find_clickable_element(search_locator)
+        searchbar.send_keys(search + Keys.ENTER)
 
-    print(f"Successfully found link: {driver.title}")
+        link = util.find_clickable_element(link_locator)
+        link.click()
 
+        return search in driver.title
+    
+    except TimeoutException:
+        return False
+    except Exception as e:
+        print(f"An unexpected error occurred in search logic: {e}")
+        return False
 
 
 if __name__ == '__main__':  
+    driver = None
     try:
 
         driver = driver_setup()
         util = SeleniumUtilities(driver, 15)
         
-        url = "https://www.google.com"
-        driver.get(url)
-
         searchbar_locator = (By.NAME, "q")
-        link_locator = (By.PARTIAL_LINK_TEXT, "DataArt")
+        search = "DataArt"
+        link_locator = (By.PARTIAL_LINK_TEXT, search)
 
-        search(searchbar_locator, link_locator)
+        success = search_logic(driver, util, searchbar_locator, search, link_locator)
 
-        time.sleep(5)
+        if success:
+            print(f"Successfully found link: {driver.title}")
+        else:
+            print("Search logic failure.")
 
-        driver.quit()
-        print("Browser closed")
+        time.sleep(3)
 
     except Exception as e:
         print(f"Error: {e}")
+    
+    finally:
+        if driver:
+            driver.quit()
+            print("Browser closed")
