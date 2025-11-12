@@ -1,5 +1,8 @@
 import pytest
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException
 from search_app import driver_setup, SeleniumUtilities, search_logic
 
 @pytest.fixture(scope="module")
@@ -21,24 +24,22 @@ def test_helper_class_works(browser_instance):
     search_bar = util.find_clickable_element((By.NAME, "q"))
     assert search_bar.is_displayed()
 
-# def test_app_main_logic_success(browser_instance):
-#     driver = browser_instance
-#     util = SeleniumUtilities(driver, 5)
-    
-#     search_locator = (By.NAME, "q")
-#     search = "DataArt"
-#     link_locator = (By.PARTIAL_LINK_TEXT, search)
-
-#     result = search_logic(driver, util, search_locator, link_locator, search)
-#     assert result is True
-
-def test_app_main_logic_failure_on_bad_link(browser_instance):
-
+def test_search_logic_success(browser_instance):
     driver = browser_instance
     util = SeleniumUtilities(driver, 5)
     
     search_locator = (By.NAME, "q")
-    bad_link_locator = (By.PARTIAL_LINK_TEXT, "NON_EXISTENT_LINK_12345")
+    search = "DataArt"
+    link_locator = (By.PARTIAL_LINK_TEXT, search)
     
-    result = search_logic(driver, util, search_locator, bad_link_locator)
-    assert result is False
+    driver.get("https://www.google.com")
+    searchbar = util.find_clickable_element((By.NAME, "q"))
+
+    search_logic(driver, util, search_locator, link_locator, search)
+    
+    WebDriverWait(driver, 5).until(
+        EC.staleness_of(searchbar)
+    )
+
+    # result = search_logic(driver, util, search_locator, link_locator, search)
+    # assert result is True

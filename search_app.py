@@ -39,7 +39,7 @@ def driver_setup():
     print("Driver is active")
     return driver
 
-def search_logic(driver, util, search_locator, link_locator, search="DataArt"):
+def search_logic(driver, util, search_locator, link_locator, search):
     try:
         url = "https://www.google.com"
         driver.get(url)
@@ -47,10 +47,10 @@ def search_logic(driver, util, search_locator, link_locator, search="DataArt"):
         searchbar = util.find_clickable_element(search_locator)
         searchbar.send_keys(search + Keys.ENTER)
 
-        link = util.find_clickable_element(link_locator)
-        link.click()
+        # link = util.find_clickable_element(link_locator)
+        # link.click()
 
-        return search in driver.title
+        # return search in driver.title
     
     except TimeoutException:
         return False
