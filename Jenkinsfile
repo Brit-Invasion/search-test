@@ -1,11 +1,16 @@
 pipeline {
     agent any
-
-    options {
-        buildName "Build №${BUILD_NUMBER}"
-    }
     
     stages {
+
+        stage('Set Build Name') {
+            steps {
+                script {
+                    currentBuild.displayName = "Build №${BUILD_NUMBER}" 
+                }
+            }
+        }
+        
         stage('Checkout') {
             steps {
                 git 'https://github.com/Brit-Invasion/search-test' 
