@@ -10,12 +10,6 @@ pipeline {
                 }
             }
         }
-        
-        stage('Checkout') {
-            steps {
-                git 'https://github.com/Brit-Invasion/search-test' 
-            }
-        }
 
         stage('Install Dependencies') {
             steps {
