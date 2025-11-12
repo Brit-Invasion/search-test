@@ -47,10 +47,10 @@ def search_logic(driver, util, search_locator, link_locator, search):
         searchbar = util.find_clickable_element(search_locator)
         searchbar.send_keys(search + Keys.ENTER)
 
-        link = util.find_clickable_element(link_locator)
-        link.click()
+        # link = util.find_clickable_element(link_locator)
+        # link.click()
 
-        return search in driver.title
+        # return search in driver.title
     
     except TimeoutException:
         return False
