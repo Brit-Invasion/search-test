@@ -42,3 +42,13 @@ def test_load_page_success(browser_instance):
         EC.staleness_of(searchbar)
     )
 
+def test_search_success(browser_instance):
+    driver = browser_instance
+    util = SeleniumUtilities(driver, 5)
+    
+    search_locator = (By.NAME, "q")
+    search = "DataArt"
+    link_locator = (By.PARTIAL_LINK_TEXT, search)
+
+    result = search_logic(driver, util, search_locator, link_locator, search)
+    assert result is True
