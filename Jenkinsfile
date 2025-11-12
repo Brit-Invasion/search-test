@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    options {
+        buildName "Build №${BUILD_NUMBER}"
+    }
+    
     stages {
         stage('Checkout') {
             steps {
