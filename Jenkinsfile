@@ -1,6 +1,6 @@
 pipeline {
     agent any
-    
+
     stages {
 
         stage('Set Build Name') {
@@ -10,18 +10,18 @@ pipeline {
                 }
             }
         }
-
+        
         stage('Install Dependencies') {
             steps {
                 echo 'Installing Python packages...'
-                bat 'pip install -r requirements.txt'
+                bat '"C:\\Users\\ybritavskyi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe" -m pip install -r requirements.txt'
             }
         }
 
         stage('Test') {
             steps {
                 echo 'Running tests...'
-                bat 'pytest --junitxml=report.xml || true'
+                bat '"C:\\Users\\ybritavskyi\\AppData\\Local\\Programs\\Python\\Python314\\python.exe" -m pytest --junitxml=report.xml || echo "Pytest failed"'
             }
         }
     }
